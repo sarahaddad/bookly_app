@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'bestseller_listview.dart';
 
 import 'custom_appbar.dart';
-import 'custom_list_view.dart';
+import 'featuredbooks_list_view.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
@@ -12,6 +12,7 @@ class HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: Column(
@@ -21,14 +22,14 @@ class HomePageBody extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: CustomAppBar(),
               ),
-              CustomListView(),
+              FeturedBooksListView(),
               SizedBox(
                 height: 50,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'Best Seller',
+                  'Newest Books',
                   style: Styles.textStyle18,
                 ),
               ),
