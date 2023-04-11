@@ -53,7 +53,10 @@ class BookDetailsSection extends StatelessWidget {
         const CustomAppBarBookDetails(),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .2),
-          child: const CustomBookImage(),
+          child: CustomBookImage(
+            imageUrl:
+                'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png',
+          ),
         ),
         const SizedBox(
           height: 43,
@@ -77,7 +80,9 @@ class BookDetailsSection extends StatelessWidget {
         const SizedBox(
           height: 18,
         ),
-        const BookRating(
+        BookRating(
+          count: 5,
+          rating: 5,
           mainAxisAlignment: MainAxisAlignment.center,
         ),
         const SizedBox(
