@@ -1,10 +1,10 @@
 import 'package:ebook/core/errors/failures.dart';
 import 'package:ebook/core/widgets/custom_error_widget.dart';
 import 'package:ebook/core/widgets/custom_progress_indicator.dart';
-import 'package:ebook/features/home/presentaion/managers/cubit/newest_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../managers/newest_books_cubit/newest_books_cubit.dart';
 import 'bestseller_listview_item.dart';
 
 class BestSellerListView extends StatelessWidget {

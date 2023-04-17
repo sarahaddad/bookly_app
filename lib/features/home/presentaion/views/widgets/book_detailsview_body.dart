@@ -1,4 +1,5 @@
 import 'package:ebook/core/utils/styles.dart';
+import 'package:ebook/features/home/data/models/book_model/book_model.dart';
 import 'package:ebook/features/home/presentaion/views/widgets/book_rating.dart';
 import 'package:ebook/features/home/presentaion/views/widgets/similar_book_listview_items.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +10,8 @@ import 'custom_book_image.dart';
 import 'customappbarbookdetails.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
-  const BookDetailsViewBody({super.key});
+  const BookDetailsViewBody({super.key, required this.bookModel});
+  final BookModel bookModel;
   @override
   build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -21,16 +23,18 @@ class BookDetailsViewBody extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              children: const [
-                BookDetailsSection(),
-                Expanded(
+              children: [
+                BookDetailsSection(
+                  bookModel: bookModel,
+                ),
+                const Expanded(
                   child: SizedBox(
                     height: 50,
                     //50
                   ),
                 ),
-                SimilarBooksSection(),
-                SizedBox(
+                const SimilarBooksSection(),
+                const SizedBox(
                   height: 40,
                 ),
               ],
@@ -43,7 +47,8 @@ class BookDetailsViewBody extends StatelessWidget {
 }
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key});
+  const BookDetailsSection({super.key, required this.bookModel});
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +59,17 @@ class BookDetailsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .2),
           child: CustomBookImage(
-            imageUrl:
+            imageUrl: bookModel.volumeInfo.imageLinks?.thumbnail ??
                 'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png',
           ),
         ),
         const SizedBox(
           height: 43,
         ),
-        const Text(
-          'The Jungle Book',
+        Text(
+          bookModel.volumeInfo.title ?? '',
           style: Styles.textStyle30,
+          textAlign: TextAlign.center,
         ),
         const SizedBox(
           height: 6,
@@ -71,7 +77,7 @@ class BookDetailsSection extends StatelessWidget {
         Opacity(
           opacity: .7,
           child: Text(
-            'Rudyard Kipling',
+            bookModel.volumeInfo.authors?[0] ?? '',
             style: Styles.textStyle20.copyWith(
               fontStyle: FontStyle.italic,
             ),
@@ -81,8 +87,8 @@ class BookDetailsSection extends StatelessWidget {
           height: 18,
         ),
         BookRating(
-          count: 5,
-          rating: 5,
+          count: 0,
+          rating: bookModel.volumeInfo.maturityRating ?? '0',
           mainAxisAlignment: MainAxisAlignment.center,
         ),
         const SizedBox(
