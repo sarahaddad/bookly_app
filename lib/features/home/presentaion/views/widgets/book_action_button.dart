@@ -1,4 +1,5 @@
 import 'package:ebook/core/utils/custom_button.dart';
+import 'package:ebook/core/utils/functions/url_luncher.dart';
 import 'package:ebook/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,21 +29,26 @@ class BookActionButton extends StatelessWidget {
           Expanded(
             child: CustomButton(
               onPressed: () async {
-                final Uri url = Uri.parse(bookModel.volumeInfo.previewLink!);
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url);
-                }
+                customLuncherUrl(bookModel.volumeInfo.previewLink, context);
               },
               buttonBackgroundColor: const Color(0xffEf8262),
               textColor: Colors.white,
               borderRadius: const BorderRadius.only(
                   bottomRight: Radius.circular(14),
                   topRight: Radius.circular(14)),
-              text: 'Free preview',
+              text: getText(bookModel),
             ),
           ),
         ],
       ),
     );
+  }
+
+  String getText(BookModel bookModel) {
+    if (bookModel.volumeInfo.previewLink != null) {
+      return 'Preview';
+    } else {
+      return 'Not Available';
+    }
   }
 }
